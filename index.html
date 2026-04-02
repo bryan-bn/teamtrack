@@ -931,7 +931,7 @@
 
 <script>
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
-const JSONBIN_BIN_ID = '69cea65b36566621a87302c2';
+const JSONBIN_BIN_ID = '69ceb13b856a682189f3afd5';
 const JSONBIN_API_KEY = '$2a$10$79ZEuUyG7BsPxGnCLcgsZeT2EjlW4Abh9xC9ykaW6/AeBC6XgQCPq';
 const JSONBIN_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
 const CLAUDE_API_URL = 'https://api.anthropic.com/v1/messages';
@@ -960,11 +960,7 @@ async function loadFromJsonBin() {
   try {
     setSyncStatus('syncing', 'loading…');
     const res = await fetch(`${JSONBIN_URL}/latest`, {
-      headers: {
-        'X-Master-Key': JSONBIN_API_KEY,
-        'X-Access-Key': JSONBIN_API_KEY,
-        'X-Bin-Meta': 'false'
-      }
+      headers: { 'X-Bin-Meta': 'false' }
     });
     if (!res.ok) throw new Error(res.status);
     const data = await res.json();
@@ -983,11 +979,7 @@ async function saveToJsonBin() {
   try {
     const res = await fetch(JSONBIN_URL, {
       method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'X-Master-Key': JSONBIN_API_KEY,
-        'X-Access-Key': JSONBIN_API_KEY
-      },
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ tasks })
     });
     if (!res.ok) throw new Error(res.status);
