@@ -960,7 +960,11 @@ async function loadFromJsonBin() {
   try {
     setSyncStatus('syncing', 'loading…');
     const res = await fetch(`${JSONBIN_URL}/latest`, {
-      headers: { 'X-Master-Key': JSONBIN_API_KEY, 'X-Bin-Meta': 'false' }
+      headers: {
+        'X-Master-Key': JSONBIN_API_KEY,
+        'X-Access-Key': JSONBIN_API_KEY,
+        'X-Bin-Meta': 'false'
+      }
     });
     if (!res.ok) throw new Error(res.status);
     const data = await res.json();
@@ -981,7 +985,8 @@ async function saveToJsonBin() {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'X-Master-Key': JSONBIN_API_KEY
+        'X-Master-Key': JSONBIN_API_KEY,
+        'X-Access-Key': JSONBIN_API_KEY
       },
       body: JSON.stringify({ tasks })
     });
