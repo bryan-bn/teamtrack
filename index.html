@@ -1045,7 +1045,9 @@ async function loadFromJsonBin() {
   try {
     setSyncStatus('syncing', 'loading…');
     const res = await fetch(`${JSONBIN_URL}/latest`, {
-      headers: { 'X-Bin-Meta': 'false' }
+      headers: {
+        'X-Bin-Meta': 'false'
+      }
     });
     if (!res.ok) throw new Error(res.status);
     const data = await res.json();
@@ -1064,7 +1066,9 @@ async function saveToJsonBin() {
   try {
     const res = await fetch(JSONBIN_URL, {
       method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json'
+      },
       body: JSON.stringify({ tasks })
     });
     if (!res.ok) throw new Error(res.status);
@@ -1196,15 +1200,19 @@ function renderTaskDetail(t) {
 
     ${subtasks.length ? `
     <div class="section-header">Sub-tasks</div>
-    ${subtasks.map(st => {
+    ${subtasks.map((st, si) => {
       const assigneeLabel = st.assignee ? (OWNER_LABELS[st.assignee] || st.assignee) : '';
       const depLabel = st.dependency ? (OWNER_LABELS[st.dependency] || st.dependency) : '';
+      const stStatus = st.status || 'Open';
       return `<div class="subtask-item">
         <span class="subtask-type ${st.type||'nextstep'}">${st.type==='nextstep'?'Next Step':st.type==='completed'?'Completed':'Blocked'}</span>
         <span style="flex:1">${escHtml(st.text)}</span>
         ${assigneeLabel ? `<span class="subtask-assignee-badge">→ ${escHtml(assigneeLabel)}</span>` : ''}
         ${depLabel ? `<span class="subtask-dep-badge">dep: ${escHtml(depLabel)}</span>` : ''}
         ${st.dueDate ? `<span style="font-size:11px;color:var(--text3)">${st.dueDate}</span>` : ''}
+        <select class="form-select" style="width:130px;font-size:11px;padding:3px 24px 3px 8px" onchange="quickUpdateSubtask('${t.id}', ${si}, this.value)">
+          ${['Open','In Progress','Done','Blocked'].map(s => `<option ${stStatus===s?'selected':''}>${s}</option>`).join('')}
+        </select>
       </div>`;
     }).join('')}` : ''}
 
@@ -1422,6 +1430,22 @@ function quickUpdate(id, field, val) {
   scheduleSave();
 }
 
+function quickUpdateSubtask(taskId, subtaskIndex, status) {
+  const t = tasks.find(x => x.id === taskId);
+  if (!t || !t.subtasks[subtaskIndex]) return;
+  t.subtasks[subtaskIndex].status = status;
+  renderTasks();
+  scheduleSave();
+}
+
+function quickUpdateSubtask(taskId, subtaskIndex, status) {
+  const t = tasks.find(x => x.id === taskId);
+  if (!t || !t.subtasks[subtaskIndex]) return;
+  t.subtasks[subtaskIndex].status = status;
+  renderTasks();
+  scheduleSave();
+}
+
 // ─── SUBTASKS ─────────────────────────────────────────────────────────────────
 function handleStAssigneeChange() {
   const sel = document.getElementById('stAssignee');
@@ -1466,6 +1490,7 @@ function addSubtask() {
   newSubtasks.push({
     text,
     type: document.getElementById('stType').value,
+    status: 'Open',
     assignee: assignee || '',
     dependency: dependency || '',
     dueDate: document.getElementById('stDue').value
