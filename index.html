@@ -1161,19 +1161,21 @@ const OWNER_LABELS = {
 async function loadFromJsonBin() {
   try {
     setSyncStatus('syncing', 'loading…');
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 8000);
     const res = await fetch(`${JSONBIN_URL}/latest`, {
-      headers: {
-        'X-Bin-Meta': 'false'
-      }
+      headers: { 'X-Bin-Meta': 'false' },
+      signal: controller.signal
     });
+    clearTimeout(timeout);
     if (!res.ok) throw new Error(res.status);
     const data = await res.json();
     tasks = data.tasks || [];
     setSyncStatus('synced', 'synced');
     return true;
   } catch(e) {
-    setSyncStatus('error', 'load failed');
-    showToast('Could not load from JSONBin', 'error');
+    setSyncStatus('error', e.name === 'AbortError' ? 'timed out' : 'load failed');
+    showToast(e.name === 'AbortError' ? 'JSONBin timed out — working offline' : 'Could not load from JSONBin', 'error');
     return false;
   }
 }
@@ -2036,9 +2038,10 @@ function escHtml(s) {
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 async function init() {
+  document.getElementById('loadingOverlay').style.display = 'none';
+  renderTasks();
   await loadFromJsonBin();
   renderTasks();
-  document.getElementById('loadingOverlay').style.display = 'none';
 }
 
 init();
