@@ -691,6 +691,113 @@
     color: var(--text3);
     font-size: 13px;
   }
+
+  /* SUMMARY */
+  .summary-board-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+
+  .summary-stat-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 12px;
+    text-align: center;
+  }
+
+  .summary-stat-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.2;
+  }
+
+  .summary-stat-label {
+    font-size: 10px;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-top: 4px;
+    font-family: 'DM Mono', monospace;
+  }
+
+  .summary-owner-card {
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 14px 16px;
+    margin-bottom: 10px;
+  }
+
+  .summary-owner-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .summary-owner-name {
+    font-weight: 600;
+    font-size: 14px;
+    font-family: 'Syne', sans-serif;
+  }
+
+  .summary-owner-actions {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .summary-email-input {
+    padding: 5px 10px;
+    border-radius: var(--radius);
+    border: 1px solid var(--border2);
+    background: var(--surface3);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    width: 180px;
+  }
+  .summary-email-input:focus { outline: none; border-color: var(--accent); }
+  .summary-email-input::placeholder { color: var(--text3); }
+
+  .summary-owner-stats {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 8px;
+  }
+
+  .summary-mini-badge {
+    font-size: 10px;
+    font-family: 'DM Mono', monospace;
+    padding: 2px 7px;
+    border-radius: 3px;
+    white-space: nowrap;
+  }
+
+  .summary-task-row {
+    font-size: 12px;
+    color: var(--text2);
+    padding: 5px 0;
+    border-top: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .summary-task-title {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 </style>
 </head>
 <body>
@@ -726,6 +833,7 @@
 <div class="toolbar">
   <button class="btn primary" onclick="openAddModal()">+ Add Task</button>
   <button class="btn" onclick="openImportModal()">↑ Import JSON</button>
+  <button class="btn" onclick="openSummaryModal()">◎ Summary</button>
   <div class="spacer"></div>
 
   <input class="search-input" type="text" placeholder="Search tasks…" id="searchInput" oninput="renderTasks()">
@@ -1015,7 +1123,16 @@
   </div>
 </div>
 
-<script>
+<!-- SUMMARY MODAL -->
+<div class="modal-overlay" id="summaryModal">
+  <div class="modal" style="max-width:720px">
+    <div class="modal-title">
+      <span>◎ Summary</span>
+      <button class="modal-close" onclick="closeModal('summaryModal')">✕</button>
+    </div>
+    <div id="summaryContent"></div>
+  </div>
+</div>
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
 const JSONBIN_BIN_ID = '69ceb13b856a682189f3afd5';
 const JSONBIN_API_KEY = '$2a$10$79ZEuUyG7BsPxGnCLcgsZeT2EjlW4Abh9xC9ykaW6/AeBC6XgQCPq';
@@ -1662,6 +1779,237 @@ function addExtractedTasks() {
   renderTasks();
   scheduleSave();
   showToast(`Added ${added} task${added!==1?'s':''}`, 'success');
+}
+
+// ─── SUMMARY ──────────────────────────────────────────────────────────────────
+function openSummaryModal() {
+  document.getElementById('summaryContent').innerHTML = buildSummaryHTML();
+  openModal('summaryModal');
+}
+
+function buildSummaryHTML() {
+  if (!tasks.length) return '<div style="color:var(--text3);text-align:center;padding:40px">No tasks yet.</div>';
+
+  const STATUS_COLORS = {
+    'Open': 'color:var(--open)',
+    'In Progress': 'color:var(--inprogress)',
+    'Waiting': 'color:var(--waiting)',
+    'Done': 'color:var(--done)',
+    'Behind': 'color:var(--behind)'
+  };
+
+  const PRIO_COLORS = {
+    'Critical': 'background:rgba(255,77,106,0.15);color:var(--critical)',
+    'High': 'background:rgba(255,140,66,0.15);color:var(--high)',
+    'Medium': 'background:rgba(245,200,66,0.12);color:var(--medium)',
+    'Low': 'background:rgba(107,114,128,0.15);color:var(--low)'
+  };
+
+  // ── Board-level stats ──
+  const total = tasks.length;
+  const counts = { Open:0, 'In Progress':0, Waiting:0, Done:0, Behind:0 };
+  let urgent = 0, important = 0, overdue = 0;
+  const today = new Date(); today.setHours(0,0,0,0);
+
+  tasks.forEach(t => {
+    if (counts[t.status] !== undefined) counts[t.status]++;
+    if (t.urgent) urgent++;
+    if (t.important) important++;
+    if (t.dueDate) {
+      const due = new Date(t.dueDate + 'T00:00:00');
+      if (due < today && t.status !== 'Done') overdue++;
+    }
+  });
+
+  // subtask completion
+  let totalSubs = 0, doneSubs = 0;
+  tasks.forEach(t => {
+    (t.subtasks||[]).forEach(st => {
+      totalSubs++;
+      if (st.status === 'Done') doneSubs++;
+    });
+  });
+  const subRate = totalSubs ? Math.round((doneSubs / totalSubs) * 100) : null;
+
+  const boardHTML = `
+    <div class="section-header">Board Overview</div>
+    <div class="summary-board-grid">
+      <div class="summary-stat-card">
+        <div class="summary-stat-num">${total}</div>
+        <div class="summary-stat-label">Total</div>
+      </div>
+      <div class="summary-stat-card">
+        <div class="summary-stat-num" style="color:var(--open)">${counts['Open']}</div>
+        <div class="summary-stat-label">Open</div>
+      </div>
+      <div class="summary-stat-card">
+        <div class="summary-stat-num" style="color:var(--inprogress)">${counts['In Progress']}</div>
+        <div class="summary-stat-label">In Progress</div>
+      </div>
+      <div class="summary-stat-card">
+        <div class="summary-stat-num" style="color:var(--waiting)">${counts['Waiting']}</div>
+        <div class="summary-stat-label">Waiting</div>
+      </div>
+      <div class="summary-stat-card">
+        <div class="summary-stat-num" style="color:var(--behind)">${counts['Behind']}</div>
+        <div class="summary-stat-label">Behind</div>
+      </div>
+      <div class="summary-stat-card">
+        <div class="summary-stat-num" style="color:var(--done)">${counts['Done']}</div>
+        <div class="summary-stat-label">Done</div>
+      </div>
+      <div class="summary-stat-card">
+        <div class="summary-stat-num" style="color:var(--critical)">${overdue}</div>
+        <div class="summary-stat-label">Overdue</div>
+      </div>
+      <div class="summary-stat-card">
+        <div class="summary-stat-num" style="color:var(--urgent)">${urgent}</div>
+        <div class="summary-stat-label">🔥 Urgent</div>
+      </div>
+      <div class="summary-stat-card">
+        <div class="summary-stat-num" style="color:var(--important)">${important}</div>
+        <div class="summary-stat-label">⭐ Important</div>
+      </div>
+      ${subRate !== null ? `<div class="summary-stat-card">
+        <div class="summary-stat-num" style="color:var(--done)">${subRate}%</div>
+        <div class="summary-stat-label">Sub-tasks Done</div>
+      </div>` : ''}
+    </div>`;
+
+  // ── Per-owner breakdown ──
+  const ownerMap = {};
+  tasks.forEach(t => {
+    const key = t.owner || 'me';
+    if (!ownerMap[key]) ownerMap[key] = [];
+    ownerMap[key].push(t);
+  });
+
+  const ownersHTML = Object.entries(ownerMap)
+    .sort((a,b) => b[1].length - a[1].length)
+    .map(([ownerKey, ownerTasks]) => {
+      const ownerName = OWNER_LABELS[ownerKey] || ownerKey;
+      const oTotal = ownerTasks.length;
+      const oCounts = { Open:0, 'In Progress':0, Waiting:0, Done:0, Behind:0 };
+      let oOverdue = 0, oUrgent = 0;
+      ownerTasks.forEach(t => {
+        if (oCounts[t.status] !== undefined) oCounts[t.status]++;
+        if (t.urgent) oUrgent++;
+        if (t.dueDate) {
+          const due = new Date(t.dueDate + 'T00:00:00');
+          if (due < today && t.status !== 'Done') oOverdue++;
+        }
+      });
+
+      // subtask rate for owner
+      let oSubs = 0, oDone = 0;
+      ownerTasks.forEach(t => {
+        (t.subtasks||[]).forEach(st => { oSubs++; if (st.status === 'Done') oDone++; });
+      });
+
+      const statBadges = Object.entries(oCounts)
+        .filter(([,v]) => v > 0)
+        .map(([s,v]) => `<span class="summary-mini-badge" style="background:var(--surface3);${STATUS_COLORS[s]}">${v} ${s}</span>`)
+        .join('');
+
+      const taskRows = ownerTasks
+        .slice()
+        .sort((a,b) => {
+          const PO = { Critical:0, High:1, Medium:2, Low:3 };
+          return (PO[a.priority]||2) - (PO[b.priority]||2);
+        })
+        .map(t => {
+          const overdueMark = t.dueDate && new Date(t.dueDate+'T00:00:00') < today && t.status !== 'Done'
+            ? `<span style="color:var(--critical);font-size:10px">overdue</span>` : '';
+          return `<div class="summary-task-row">
+            <span class="summary-mini-badge" style="${PRIO_COLORS[t.priority]||''}">${t.priority||'Med'}</span>
+            <span class="summary-mini-badge" style="background:var(--surface3);${STATUS_COLORS[t.status]||''}">${t.status||'Open'}</span>
+            <span class="summary-task-title">${escHtml(t.title)}</span>
+            ${overdueMark}
+            ${t.urgent ? '<span style="font-size:11px">🔥</span>' : ''}
+            ${t.important ? '<span style="font-size:11px">⭐</span>' : ''}
+          </div>`;
+        }).join('');
+
+      const emailBody = buildOwnerEmailBody(ownerName, ownerTasks, oCounts, oOverdue, oUrgent, oSubs, oDone);
+      const inputId = `email-${ownerKey.replace(/[^a-z0-9]/gi,'_')}`;
+
+      return `<div class="summary-owner-card">
+        <div class="summary-owner-header">
+          <div>
+            <div class="summary-owner-name">${escHtml(ownerName)}</div>
+            <div style="font-size:11px;color:var(--text3);margin-top:2px;font-family:'DM Mono',monospace">${oTotal} task${oTotal!==1?'s':''} ${oOverdue>0?`· <span style="color:var(--critical)">${oOverdue} overdue</span>`:''} ${oUrgent>0?`· 🔥 ${oUrgent} urgent`:''} ${oSubs>0?`· ${oDone}/${oSubs} sub-tasks done`:''}</div>
+          </div>
+          <div class="summary-owner-actions">
+            <input class="summary-email-input" id="${inputId}" type="email" placeholder="owner@email.com">
+            <button class="btn" onclick="emailOwner('${inputId}', '${escHtml(ownerName)}', \`${emailBody.replace(/`/g,"'").replace(/\\/g,'\\\\')}\`)">✉ Email</button>
+            <button class="btn" onclick="copyOwnerSummary(\`${emailBody.replace(/`/g,"'").replace(/\\/g,'\\\\')}\`)">⎘ Copy</button>
+          </div>
+        </div>
+        <div class="summary-owner-stats">${statBadges}</div>
+        ${taskRows}
+      </div>`;
+    }).join('');
+
+  return boardHTML + `<div class="section-header">By Owner</div>` + ownersHTML;
+}
+
+function buildOwnerEmailBody(ownerName, tasks, counts, overdue, urgent, totalSubs, doneSubs) {
+  const lines = [];
+  lines.push(`Hi ${ownerName},`);
+  lines.push('');
+  lines.push(`Here is your current task summary from TeamTrack:`);
+  lines.push('');
+  lines.push(`Total tasks: ${tasks.length}`);
+  const statusLine = Object.entries(counts).filter(([,v])=>v>0).map(([s,v])=>`${v} ${s}`).join(' · ');
+  if (statusLine) lines.push(`Status: ${statusLine}`);
+  if (overdue) lines.push(`Overdue: ${overdue}`);
+  if (urgent) lines.push(`Urgent: ${urgent}`);
+  if (totalSubs) lines.push(`Sub-tasks: ${doneSubs}/${totalSubs} done`);
+  lines.push('');
+  lines.push('─────────────────────────');
+
+  const PRIO_ORDER = { Critical:0, High:1, Medium:2, Low:3 };
+  const sorted = [...tasks].sort((a,b) => (PRIO_ORDER[a.priority]||2) - (PRIO_ORDER[b.priority]||2));
+
+  sorted.forEach(t => {
+    lines.push('');
+    lines.push(`[${t.priority||'Medium'}] [${t.status||'Open'}] ${t.title}`);
+    if (t.description) lines.push(`  ${t.description}`);
+    if (t.dueDate) lines.push(`  Due: ${t.dueDate}`);
+    if (t.urgent) lines.push(`  🔥 Urgent`);
+    if (t.important) lines.push(`  ⭐ Important`);
+    if (t.subtasks && t.subtasks.length) {
+      lines.push(`  Sub-tasks:`);
+      t.subtasks.forEach(st => {
+        lines.push(`    • [${st.status||'Open'}] ${st.text}`);
+      });
+    }
+  });
+
+  lines.push('');
+  lines.push('─────────────────────────');
+  lines.push('Sent from TeamTrack');
+  return lines.join('\n');
+}
+
+function emailOwner(inputId, ownerName, body) {
+  const emailEl = document.getElementById(inputId);
+  const email = emailEl ? emailEl.value.trim() : '';
+  const subject = encodeURIComponent(`TeamTrack Summary — ${ownerName}`);
+  const encodedBody = encodeURIComponent(body);
+  if (email) {
+    window.location.href = `mailto:${email}?subject=${subject}&body=${encodedBody}`;
+  } else {
+    window.location.href = `mailto:?subject=${subject}&body=${encodedBody}`;
+  }
+}
+
+function copyOwnerSummary(body) {
+  navigator.clipboard.writeText(body).then(() => {
+    showToast('Summary copied to clipboard', 'success');
+  }).catch(() => {
+    showToast('Could not copy — try manually', 'error');
+  });
 }
 
 // ─── MODAL HELPERS ────────────────────────────────────────────────────────────
