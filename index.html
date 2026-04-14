@@ -1137,7 +1137,8 @@
 <script>
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
 const JSONBIN_BIN_ID = '69ceb13b856a682189f3afd5';
-const JSONBIN_API_KEY = '$2a$10$79ZEuUyG7BsPxGnCLcgsZeT2EjlW4Abh9xC9ykaW6/AeBC6XgQCPq';
+const JSONBIN_API_KEY = '$2a$10$2yGSjveDBlaz0ph6DALbneu2iSc5yERaNTopKgRIxej4uv5Ze/F/m';
+const JSONBIN_ACCESS_KEY = '$2a$10$79ZEuUyG7BsPxGnCLcgsZeT2EjlW4Abh9xC9ykaW6/AeBC6XgQCPq';
 const JSONBIN_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
 // (Claude API not used directly in tracker — extraction handled via skill)
 
@@ -1168,6 +1169,7 @@ async function loadFromJsonBin() {
     const res = await fetch(`${JSONBIN_URL}/latest`, {
       headers: {
         'X-Master-Key': JSONBIN_API_KEY,
+        'X-Access-Key': JSONBIN_ACCESS_KEY,
         'X-Bin-Meta': 'false'
       },
       signal: controller.signal
@@ -1192,7 +1194,8 @@ async function saveToJsonBin() {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        'X-Master-Key': JSONBIN_API_KEY
+        'X-Master-Key': JSONBIN_API_KEY,
+        'X-Access-Key': JSONBIN_ACCESS_KEY
       },
       body: JSON.stringify({ tasks })
     });
