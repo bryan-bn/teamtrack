@@ -1136,11 +1136,11 @@
 
 <script>
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
-const JSONBIN_BIN_ID = '69ceb13b856a682189f3afd5';
-const JSONBIN_API_KEY = '$2a$10$2yGSjveDBlaz0ph6DALbneu2iSc5yERaNTopKgRIxej4uv5Ze/F/m';
-const JSONBIN_ACCESS_KEY = '$2a$10$79ZEuUyG7BsPxGnCLcgsZeT2EjlW4Abh9xC9ykaW6/AeBC6XgQCPq';
-const JSONBIN_URL = `https://api.jsonbin.io/v3/b/${JSONBIN_BIN_ID}`;
-// (Claude API not used directly in tracker — extraction handled via skill)
+const GITHUB_TOKEN = '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';
+const GITHUB_REPO = 'bryan-bn/teamtrack';
+const GITHUB_FILE = 'tasks.json';
+const GITHUB_API_URL = `https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILE}`;
+const GITHUB_RAW_URL = `https://raw.githubusercontent.com/${GITHUB_REPO}/main/${GITHUB_FILE}`;
 
 // ─── STATE ────────────────────────────────────────────────────────────────────
 let tasks = [];
@@ -1160,18 +1160,14 @@ const OWNER_LABELS = {
   it:'IT Team', digital:'Digital Team', other:'Other'
 };
 
-// ─── JSONBIN ──────────────────────────────────────────────────────────────────
-async function loadFromJsonBin() {
+// ─── GITHUB STORAGE ───────────────────────────────────────────────────────────
+async function loadFromGitHub() {
   try {
     setSyncStatus('syncing', 'loading…');
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 8000);
-    const res = await fetch(`${JSONBIN_URL}/latest`, {
-      headers: {
-        'X-Master-Key': JSONBIN_API_KEY,
-        'X-Access-Key': JSONBIN_ACCESS_KEY,
-        'X-Bin-Meta': 'false'
-      },
+    // Use raw URL for reading -- fast, no auth needed on public repo
+    const res = await fetch(`${GITHUB_RAW_URL}?t=${Date.now()}`, {
       signal: controller.signal
     });
     clearTimeout(timeout);
@@ -1182,36 +1178,47 @@ async function loadFromJsonBin() {
     return true;
   } catch(e) {
     setSyncStatus('error', e.name === 'AbortError' ? 'timed out' : 'load failed');
-    showToast(e.name === 'AbortError' ? 'JSONBin timed out — working offline' : 'Could not load from JSONBin', 'error');
+    showToast(e.name === 'AbortError' ? 'Load timed out — working offline' : 'Could not load tasks', 'error');
     return false;
   }
 }
 
-async function saveToJsonBin() {
+async function saveToGitHub() {
   setSyncStatus('syncing', 'saving…');
   try {
-    const res = await fetch(JSONBIN_URL, {
+    // Get current SHA (required for updates)
+    const shaRes = await fetch(GITHUB_API_URL, {
+      headers: { 'Authorization': `token ${GITHUB_TOKEN}` }
+    });
+    const shaData = await shaRes.json();
+    const sha = shaData.sha;
+
+    const content = btoa(unescape(encodeURIComponent(JSON.stringify({ tasks }, null, 2))));
+    const res = await fetch(GITHUB_API_URL, {
       method: 'PUT',
       headers: {
-        'Content-Type': 'application/json',
-        'X-Master-Key': JSONBIN_API_KEY,
-        'X-Access-Key': JSONBIN_ACCESS_KEY
+        'Authorization': `token ${GITHUB_TOKEN}`,
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ tasks })
+      body: JSON.stringify({
+        message: 'Update tasks',
+        content,
+        sha
+      })
     });
     if (!res.ok) throw new Error(res.status);
     setSyncStatus('synced', 'saved');
     return true;
   } catch(e) {
     setSyncStatus('error', 'save failed');
-    showToast('Could not save to JSONBin', 'error');
+    showToast('Could not save tasks', 'error');
     return false;
   }
 }
 
 function scheduleSave() {
   clearTimeout(saveTimeout);
-  saveTimeout = setTimeout(() => saveToJsonBin(), 400);
+  saveTimeout = setTimeout(() => saveToGitHub(), 400);
 }
 
 function setSyncStatus(state, text) {
@@ -2039,9 +2046,9 @@ function escHtml(s) {
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 async function init() {
-  renderTasks(); // renders immediately with seeded data
-  const loaded = await loadFromJsonBin(); // tries to get latest from JSONBin
-  if (loaded) renderTasks(); // re-renders if JSONBin had newer data
+  renderTasks();
+  const loaded = await loadFromGitHub();
+  if (loaded) renderTasks();
 }
 
 init();
