@@ -794,9 +794,10 @@
 
   .summary-task-title {
     flex: 1;
-    white-space: nowrap;
+    min-width: 0;
     overflow: hidden;
     text-overflow: ellipsis;
+    white-space: nowrap;
   }
 </style>
 </head>
@@ -1792,7 +1793,10 @@ function addExtractedTasks() {
 }
 
 // ─── SUMMARY ──────────────────────────────────────────────────────────────────
+let summaryEmailBodies = {};
+
 function openSummaryModal() {
+  summaryEmailBodies = {};
   document.getElementById('summaryContent').innerHTML = buildSummaryHTML();
   openModal('summaryModal');
 }
@@ -1942,6 +1946,8 @@ function buildSummaryHTML() {
 
       const emailBody = buildOwnerEmailBody(ownerName, ownerTasks, oCounts, oOverdue, oUrgent, oSubs, oDone);
       const inputId = `email-${ownerKey.replace(/[^a-z0-9]/gi,'_')}`;
+      const bodyId = `body-${ownerKey.replace(/[^a-z0-9]/gi,'_')}`;
+      summaryEmailBodies[bodyId] = emailBody;
 
       return `<div class="summary-owner-card">
         <div class="summary-owner-header">
@@ -1951,8 +1957,8 @@ function buildSummaryHTML() {
           </div>
           <div class="summary-owner-actions">
             <input class="summary-email-input" id="${inputId}" type="email" placeholder="owner@email.com">
-            <button class="btn" onclick="emailOwner('${inputId}', '${escHtml(ownerName)}', \`${emailBody.replace(/`/g,"'").replace(/\\/g,'\\\\')}\`)">✉ Email</button>
-            <button class="btn" onclick="copyOwnerSummary(\`${emailBody.replace(/`/g,"'").replace(/\\/g,'\\\\')}\`)">⎘ Copy</button>
+            <button class="btn" onclick="emailOwner('${inputId}', '${escHtml(ownerName)}', '${bodyId}')">✉ Email</button>
+            <button class="btn" onclick="copyOwnerSummary('${bodyId}')">⎘ Copy</button>
           </div>
         </div>
         <div class="summary-owner-stats">${statBadges}</div>
@@ -2002,9 +2008,10 @@ function buildOwnerEmailBody(ownerName, tasks, counts, overdue, urgent, totalSub
   return lines.join('\n');
 }
 
-function emailOwner(inputId, ownerName, body) {
+function emailOwner(inputId, ownerName, bodyId) {
   const emailEl = document.getElementById(inputId);
   const email = emailEl ? emailEl.value.trim() : '';
+  const body = summaryEmailBodies[bodyId] || '';
   const subject = encodeURIComponent(`TeamTrack Summary — ${ownerName}`);
   const encodedBody = encodeURIComponent(body);
   if (email) {
@@ -2014,7 +2021,8 @@ function emailOwner(inputId, ownerName, body) {
   }
 }
 
-function copyOwnerSummary(body) {
+function copyOwnerSummary(bodyId) {
+  const body = summaryEmailBodies[bodyId] || '';
   navigator.clipboard.writeText(body).then(() => {
     showToast('Summary copied to clipboard', 'success');
   }).catch(() => {
