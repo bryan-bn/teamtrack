@@ -44,7 +44,6 @@
     line-height: 1.5;
   }
 
-  /* HEADER */
   .header {
     background: var(--surface);
     border-bottom: 1px solid var(--border);
@@ -76,11 +75,7 @@
     box-shadow: 0 0 8px var(--accent);
   }
 
-  .header-actions {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
+  .header-actions { display: flex; align-items: center; gap: 10px; }
 
   .sync-status {
     font-family: 'DM Mono', monospace;
@@ -103,7 +98,6 @@
 
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
 
-  /* STATS BAR */
   .stats-bar {
     background: var(--surface);
     border-bottom: 1px solid var(--border);
@@ -131,12 +125,7 @@
   .stat-item:first-child { padding-left: 0; }
   .stat-item:hover { background: var(--surface2); }
 
-  .stat-num {
-    font-family: 'DM Mono', monospace;
-    font-size: 14px;
-    font-weight: 500;
-  }
-
+  .stat-num { font-family: 'DM Mono', monospace; font-size: 14px; font-weight: 500; }
   .stat-num.open { color: var(--open); }
   .stat-num.inprogress { color: var(--inprogress); }
   .stat-num.waiting { color: var(--waiting); }
@@ -145,7 +134,6 @@
   .stat-num.urgent { color: var(--urgent); }
   .stat-num.important { color: var(--important); }
 
-  /* TOOLBAR */
   .toolbar {
     padding: 14px 24px;
     display: flex;
@@ -213,11 +201,7 @@
   .search-input::placeholder { color: var(--text3); }
 
   .spacer { flex: 1; }
-
-  /* MAIN */
   .main { padding: 20px 24px; }
-
-  /* TASK CARD */
   .task-list { display: flex; flex-direction: column; gap: 8px; }
 
   .task-card {
@@ -239,14 +223,8 @@
     padding: 14px 16px;
   }
 
-  .task-expand-icon {
-    color: var(--text3);
-    font-size: 10px;
-    transition: transform 0.2s;
-    user-select: none;
-  }
+  .task-expand-icon { color: var(--text3); font-size: 10px; transition: transform 0.2s; user-select: none; }
   .task-card.expanded .task-expand-icon { transform: rotate(90deg); color: var(--accent); }
-
   .task-title-area { min-width: 0; }
 
   .task-title {
@@ -271,10 +249,7 @@
     flex-wrap: wrap;
   }
 
-  .flag {
-    font-size: 12px;
-    line-height: 1;
-  }
+  .flag { font-size: 12px; line-height: 1; }
 
   .badge {
     display: inline-flex;
@@ -292,7 +267,6 @@
   .badge-status-waiting { background: rgba(245,200,66,0.15); color: var(--waiting); }
   .badge-status-done { background: rgba(52,211,153,0.12); color: var(--done); }
   .badge-status-behind { background: rgba(255,77,106,0.15); color: var(--behind); }
-
   .badge-priority-critical { background: rgba(255,77,106,0.15); color: var(--critical); }
   .badge-priority-high { background: rgba(255,140,66,0.15); color: var(--high); }
   .badge-priority-medium { background: rgba(245,200,66,0.12); color: var(--medium); }
@@ -308,16 +282,10 @@
     border: 1px solid var(--border);
   }
 
-  .due-date {
-    font-size: 11px;
-    font-family: 'DM Mono', monospace;
-    color: var(--text3);
-    white-space: nowrap;
-  }
+  .due-date { font-size: 11px; font-family: 'DM Mono', monospace; color: var(--text3); white-space: nowrap; }
   .due-date.overdue { color: var(--critical); }
   .due-date.soon { color: var(--high); }
 
-  /* TASK DETAIL PANEL */
   .task-detail {
     display: none;
     border-top: 1px solid var(--border);
@@ -350,14 +318,7 @@
     font-family: 'DM Mono', monospace;
   }
 
-  .detail-value {
-    font-size: 13px;
-    color: var(--text2);
-    line-height: 1.6;
-  }
-
-  /* UPDATES */
-  .updates-section { margin-top: 16px; }
+  .detail-value { font-size: 13px; color: var(--text2); line-height: 1.6; }
 
   .update-item {
     padding: 10px 12px;
@@ -372,15 +333,8 @@
     align-items: flex-start;
   }
 
-  .update-date {
-    font-family: 'DM Mono', monospace;
-    font-size: 10px;
-    color: var(--text3);
-    white-space: nowrap;
-    margin-top: 2px;
-  }
+  .update-date { font-family: 'DM Mono', monospace; font-size: 10px; color: var(--text3); white-space: nowrap; margin-top: 2px; }
 
-  /* SUBTASKS */
   .subtask-item {
     padding: 8px 12px;
     background: var(--surface);
@@ -394,47 +348,16 @@
     flex-wrap: wrap;
   }
 
-  .subtask-type {
-    font-size: 10px;
-    font-family: 'DM Mono', monospace;
-    padding: 2px 6px;
-    border-radius: 3px;
-    white-space: nowrap;
-  }
+  .subtask-type { font-size: 10px; font-family: 'DM Mono', monospace; padding: 2px 6px; border-radius: 3px; white-space: nowrap; }
   .subtask-type.nextstep { background: rgba(108,142,255,0.15); color: var(--open); }
   .subtask-type.completed { background: rgba(52,211,153,0.12); color: var(--done); }
   .subtask-type.blocked { background: rgba(255,77,106,0.15); color: var(--critical); }
 
-  .subtask-assignee-badge {
-    font-size: 10px;
-    font-family: 'DM Mono', monospace;
-    color: var(--text3);
-    background: var(--surface2);
-    padding: 2px 6px;
-    border-radius: 3px;
-    border: 1px solid var(--border);
-    white-space: nowrap;
-  }
+  .subtask-assignee-badge { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--text3); background: var(--surface2); padding: 2px 6px; border-radius: 3px; border: 1px solid var(--border); white-space: nowrap; }
+  .subtask-dep-badge { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--waiting); background: rgba(245,200,66,0.08); padding: 2px 6px; border-radius: 3px; border: 1px solid rgba(245,200,66,0.2); white-space: nowrap; }
 
-  .subtask-dep-badge {
-    font-size: 10px;
-    font-family: 'DM Mono', monospace;
-    color: var(--waiting);
-    background: rgba(245,200,66,0.08);
-    padding: 2px 6px;
-    border-radius: 3px;
-    border: 1px solid rgba(245,200,66,0.2);
-    white-space: nowrap;
-  }
+  .task-actions { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
 
-  .task-actions {
-    display: flex;
-    gap: 8px;
-    margin-top: 16px;
-    flex-wrap: wrap;
-  }
-
-  /* MODAL */
   .modal-overlay {
     position: fixed;
     inset: 0;
@@ -460,37 +383,11 @@
     position: relative;
   }
 
-  .modal-title {
-    font-family: 'Syne', sans-serif;
-    font-weight: 700;
-    font-size: 18px;
-    margin-bottom: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .modal-close {
-    background: none;
-    border: none;
-    color: var(--text3);
-    cursor: pointer;
-    font-size: 20px;
-    line-height: 1;
-    padding: 4px;
-  }
+  .modal-title { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 18px; margin-bottom: 20px; display: flex; align-items: center; justify-content: space-between; }
+  .modal-close { background: none; border: none; color: var(--text3); cursor: pointer; font-size: 20px; line-height: 1; padding: 4px; }
   .modal-close:hover { color: var(--text); }
-
   .form-group { margin-bottom: 16px; }
-
-  .form-label {
-    display: block;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--text2);
-    margin-bottom: 6px;
-    letter-spacing: 0.02em;
-  }
+  .form-label { display: block; font-size: 12px; font-weight: 500; color: var(--text2); margin-bottom: 6px; letter-spacing: 0.02em; }
 
   .form-input, .form-textarea, .form-select {
     width: 100%;
@@ -503,12 +400,10 @@
     font-size: 13px;
     transition: border-color 0.15s;
   }
-  .form-input:focus, .form-textarea:focus, .form-select:focus {
-    outline: none;
-    border-color: var(--accent);
-  }
+  .form-input:focus, .form-textarea:focus, .form-select:focus { outline: none; border-color: var(--accent); }
   .form-textarea { resize: vertical; min-height: 80px; }
-  .form-select { appearance: none; cursor: pointer;
+  .form-select {
+    appearance: none; cursor: pointer;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' fill='none'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236b7280' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
     background-position: right 10px center;
@@ -516,309 +411,76 @@
   }
 
   .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-
   .form-checkboxes { display: flex; gap: 16px; }
-  .form-checkbox-label {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    color: var(--text2);
-    cursor: pointer;
-    user-select: none;
-  }
+  .form-checkbox-label { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text2); cursor: pointer; user-select: none; }
   .form-checkbox-label input { accent-color: var(--accent); width: 14px; height: 14px; }
 
-  /* AI IMPORT */
-  /* (import styles removed) */
-
-  /* EMPTY STATE */
-  .empty-state {
-    text-align: center;
-    padding: 80px 20px;
-    color: var(--text3);
-  }
+  .empty-state { text-align: center; padding: 80px 20px; color: var(--text3); }
   .empty-state-icon { font-size: 40px; margin-bottom: 16px; opacity: 0.4; }
   .empty-state-title { font-family: 'Syne', sans-serif; font-size: 18px; color: var(--text2); margin-bottom: 8px; }
   .empty-state-text { font-size: 13px; line-height: 1.6; }
 
-  /* SUBTASK BUILDER */
   .subtask-builder { margin-top: 8px; }
-
-  .subtask-main-row {
-    display: flex;
-    gap: 8px;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    margin-bottom: 8px;
-  }
+  .subtask-main-row { display: flex; gap: 8px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 8px; }
   .subtask-main-row .form-input { flex: 1; min-width: 160px; }
   .subtask-main-row .form-select { width: auto; min-width: 120px; }
 
-  .subtask-meta-row {
-    display: flex;
-    gap: 8px;
-    align-items: flex-end;
-    flex-wrap: wrap;
-    padding: 10px 12px;
-    background: var(--surface3);
-    border-radius: var(--radius);
-    border: 1px solid var(--border);
-  }
+  .subtask-meta-row { display: flex; gap: 8px; align-items: flex-end; flex-wrap: wrap; padding: 10px 12px; background: var(--surface3); border-radius: var(--radius); border: 1px solid var(--border); }
   .subtask-meta-row .form-select { flex: 1; min-width: 130px; }
   .subtask-meta-row .form-input { flex: 1; min-width: 120px; }
-
-  .subtask-meta-label {
-    font-size: 10px;
-    font-family: 'DM Mono', monospace;
-    color: var(--text3);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    white-space: nowrap;
-    align-self: center;
-  }
+  .subtask-meta-label { font-size: 10px; font-family: 'DM Mono', monospace; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; align-self: center; }
 
   .added-subtasks { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
-
-  .added-subtask {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 7px 10px;
-    background: var(--surface3);
-    border-radius: var(--radius);
-    font-size: 12px;
-    flex-wrap: wrap;
-  }
+  .added-subtask { display: flex; align-items: center; gap: 8px; padding: 7px 10px; background: var(--surface3); border-radius: var(--radius); font-size: 12px; flex-wrap: wrap; }
   .added-subtask-text { flex: 1; min-width: 80px; }
   .added-subtask-remove { background: none; border: none; color: var(--text3); cursor: pointer; font-size: 14px; margin-left: auto; }
   .added-subtask-remove:hover { color: var(--critical); }
 
-  /* LOADING */
-  .loading-overlay {
-    position: fixed;
-    inset: 0;
-    background: var(--bg);
-    z-index: 300;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .loading-logo {
-    font-family: 'Syne', sans-serif;
-    font-weight: 800;
-    font-size: 28px;
-    color: var(--text);
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-
-  .loading-spinner {
-    width: 32px; height: 32px;
-    border: 2px solid var(--border2);
-    border-top-color: var(--accent);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-  }
-
+  .loading-overlay { position: fixed; inset: 0; background: var(--bg); z-index: 300; display: none; align-items: center; justify-content: center; flex-direction: column; gap: 16px; }
+  .loading-spinner { width: 32px; height: 32px; border: 2px solid var(--border2); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  .loading-text { font-size: 13px; color: var(--text3); font-family: 'DM Mono', monospace; }
-
-  /* TOAST */
-  .toast-container {
-    position: fixed;
-    bottom: 24px;
-    right: 24px;
-    z-index: 500;
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .toast {
-    background: var(--surface3);
-    border: 1px solid var(--border2);
-    border-radius: var(--radius);
-    padding: 10px 16px;
-    font-size: 13px;
-    color: var(--text);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
-    animation: slideIn 0.2s ease;
-  }
+  .toast-container { position: fixed; bottom: 24px; right: 24px; z-index: 500; display: flex; flex-direction: column; gap: 8px; }
+  .toast { background: var(--surface3); border: 1px solid var(--border2); border-radius: var(--radius); padding: 10px 16px; font-size: 13px; color: var(--text); display: flex; align-items: center; gap: 8px; box-shadow: 0 4px 20px rgba(0,0,0,0.4); animation: slideIn 0.2s ease; }
   .toast.success { border-left: 3px solid var(--done); }
   .toast.error { border-left: 3px solid var(--critical); }
   .toast.info { border-left: 3px solid var(--accent); }
-
   @keyframes slideIn { from { transform: translateX(20px); opacity: 0; } }
 
-  /* scrollbar */
   ::-webkit-scrollbar { width: 6px; height: 6px; }
   ::-webkit-scrollbar-track { background: transparent; }
   ::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 3px; }
   ::-webkit-scrollbar-thumb:hover { background: var(--text3); }
 
-  .section-header {
-    font-family: 'Syne', sans-serif;
-    font-size: 11px;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--text3);
-    margin-bottom: 12px;
-    margin-top: 8px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .section-header::after {
-    content: '';
-    flex: 1;
-    height: 1px;
-    background: var(--border);
-  }
+  .section-header { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text3); margin-bottom: 12px; margin-top: 8px; display: flex; align-items: center; gap: 8px; }
+  .section-header::after { content: ''; flex: 1; height: 1px; background: var(--border); }
 
-  .no-results {
-    text-align: center;
-    padding: 40px;
-    color: var(--text3);
-    font-size: 13px;
-  }
+  .no-results { text-align: center; padding: 40px; color: var(--text3); font-size: 13px; }
 
   /* SUMMARY */
-  .summary-board-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-    gap: 8px;
-    margin-bottom: 20px;
-  }
-
-  .summary-stat-card {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 12px;
-    text-align: center;
-  }
-
-  .summary-stat-num {
-    font-family: 'DM Mono', monospace;
-    font-size: 22px;
-    font-weight: 500;
-    line-height: 1.2;
-  }
-
-  .summary-stat-label {
-    font-size: 10px;
-    color: var(--text3);
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    margin-top: 4px;
-    font-family: 'DM Mono', monospace;
-  }
-
-  .summary-owner-card {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: var(--radius-lg);
-    padding: 14px 16px;
-    margin-bottom: 10px;
-  }
-
-  .summary-owner-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 10px;
-    flex-wrap: wrap;
-    gap: 8px;
-  }
-
-  .summary-owner-name {
-    font-weight: 600;
-    font-size: 14px;
-    font-family: 'Syne', sans-serif;
-  }
-
-  .summary-owner-actions {
-    display: flex;
-    gap: 6px;
-    align-items: center;
-    flex-wrap: wrap;
-  }
-
-  .summary-email-input {
-    padding: 5px 10px;
-    border-radius: var(--radius);
-    border: 1px solid var(--border2);
-    background: var(--surface3);
-    color: var(--text);
-    font-family: 'DM Sans', sans-serif;
-    font-size: 12px;
-    width: 180px;
-  }
+  .summary-board-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); gap: 8px; margin-bottom: 20px; }
+  .summary-stat-card { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; text-align: center; }
+  .summary-stat-num { font-family: 'DM Mono', monospace; font-size: 22px; font-weight: 500; line-height: 1.2; }
+  .summary-stat-label { font-size: 10px; color: var(--text3); text-transform: uppercase; letter-spacing: 0.06em; margin-top: 4px; font-family: 'DM Mono', monospace; }
+  .summary-owner-card { background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 14px 16px; margin-bottom: 10px; }
+  .summary-owner-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; flex-wrap: wrap; gap: 8px; }
+  .summary-owner-name { font-weight: 600; font-size: 14px; font-family: 'Syne', sans-serif; }
+  .summary-owner-actions { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  .summary-email-input { padding: 5px 10px; border-radius: var(--radius); border: 1px solid var(--border2); background: var(--surface3); color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 12px; width: 180px; }
   .summary-email-input:focus { outline: none; border-color: var(--accent); }
   .summary-email-input::placeholder { color: var(--text3); }
-
-  .summary-owner-stats {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-    margin-bottom: 8px;
-  }
-
-  .summary-mini-badge {
-    font-size: 10px;
-    font-family: 'DM Mono', monospace;
-    padding: 2px 7px;
-    border-radius: 3px;
-    white-space: nowrap;
-  }
-
-  .summary-task-row {
-    font-size: 12px;
-    color: var(--text2);
-    padding: 5px 0;
-    border-top: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .summary-task-title {
-    flex: 1;
-    min-width: 0;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
+  .summary-owner-stats { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+  .summary-mini-badge { font-size: 10px; font-family: 'DM Mono', monospace; padding: 2px 7px; border-radius: 3px; white-space: nowrap; }
+  .summary-task-row { font-size: 12px; color: var(--text2); padding: 5px 0; border-top: 1px solid var(--border); display: flex; align-items: center; gap: 8px; }
+  .summary-task-title { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 </style>
 </head>
 <body>
 
-<!-- Loading -->
-<div class="loading-overlay" id="loadingOverlay">
-  <div class="loading-logo">
-    <div class="header-logo-dot"></div>
-    TeamTrack
-  </div>
-  <div class="loading-spinner"></div>
-  <div class="loading-text">loading tasks...</div>
-</div>
+<div class="loading-overlay" id="loadingOverlay"></div>
 
-<!-- Header -->
 <div class="header">
-  <div class="header-logo">
-    <div class="header-logo-dot"></div>
-    TeamTrack
-  </div>
+  <div class="header-logo"><div class="header-logo-dot"></div>TeamTrack</div>
   <div class="header-actions">
     <div class="sync-status">
       <div class="sync-dot" id="syncDot"></div>
@@ -827,18 +489,14 @@
   </div>
 </div>
 
-<!-- Stats Bar -->
 <div class="stats-bar" id="statsBar"></div>
 
-<!-- Toolbar -->
 <div class="toolbar">
   <button class="btn primary" onclick="openAddModal()">+ Add Task</button>
   <button class="btn" onclick="openImportModal()">↑ Import JSON</button>
   <button class="btn" onclick="openSummaryModal()">◎ Summary</button>
   <div class="spacer"></div>
-
   <input class="search-input" type="text" placeholder="Search tasks…" id="searchInput" oninput="renderTasks()">
-
   <select class="filter-select" id="filterStatus" onchange="renderTasks()">
     <option value="">All Status</option>
     <option value="Open">Open</option>
@@ -847,7 +505,6 @@
     <option value="Behind">Behind</option>
     <option value="Done">Done</option>
   </select>
-
   <select class="filter-select" id="filterOwner" onchange="renderTasks()">
     <option value="">All Owners</option>
     <option value="me">Me</option>
@@ -869,7 +526,6 @@
     <option value="digital">Digital Team</option>
     <option value="other">Other</option>
   </select>
-
   <select class="filter-select" id="filterPriority" onchange="renderTasks()">
     <option value="">All Priority</option>
     <option value="Critical">Critical</option>
@@ -877,25 +533,18 @@
     <option value="Medium">Medium</option>
     <option value="Low">Low</option>
   </select>
-
   <select class="filter-select" id="filterSort" onchange="renderTasks()">
     <option value="newest">Newest</option>
     <option value="priority">Priority</option>
     <option value="duedate">Due Date</option>
     <option value="status">Status</option>
   </select>
-
   <button class="btn" id="btnUrgent" onclick="toggleFilter('urgent')" title="Show Urgent">🔥</button>
   <button class="btn" id="btnImportant" onclick="toggleFilter('important')" title="Show Important">⭐</button>
   <button class="btn" id="btnHideDone" onclick="toggleFilter('hideDone')" title="Hide Done">✓</button>
 </div>
 
-<!-- Main -->
-<div class="main">
-  <div class="task-list" id="taskList"></div>
-</div>
-
-<!-- Toast Container -->
+<div class="main"><div class="task-list" id="taskList"></div></div>
 <div class="toast-container" id="toastContainer"></div>
 
 <!-- ADD/EDIT MODAL -->
@@ -905,17 +554,14 @@
       <span id="modalTitle">Add Task</span>
       <button class="modal-close" onclick="closeModal('taskModal')">✕</button>
     </div>
-
     <div class="form-group">
       <label class="form-label">Title *</label>
       <input class="form-input" id="fTitle" placeholder="Task title">
     </div>
-
     <div class="form-group">
       <label class="form-label">Description</label>
       <textarea class="form-textarea" id="fDesc" placeholder="Details, context, notes…"></textarea>
     </div>
-
     <div class="form-row">
       <div class="form-group">
         <label class="form-label">Owner</label>
@@ -946,29 +592,20 @@
         <input class="form-input" id="fCategory" placeholder="e.g. Marketing, Ops">
       </div>
     </div>
-
     <div class="form-row">
       <div class="form-group">
         <label class="form-label">Status</label>
         <select class="form-select" id="fStatus">
-          <option>Open</option>
-          <option>In Progress</option>
-          <option>Waiting</option>
-          <option>Done</option>
-          <option>Behind</option>
+          <option>Open</option><option>In Progress</option><option>Waiting</option><option>Done</option><option>Behind</option>
         </select>
       </div>
       <div class="form-group">
         <label class="form-label">Priority</label>
         <select class="form-select" id="fPriority">
-          <option>Medium</option>
-          <option>Critical</option>
-          <option>High</option>
-          <option>Low</option>
+          <option>Medium</option><option>Critical</option><option>High</option><option>Low</option>
         </select>
       </div>
     </div>
-
     <div class="form-row">
       <div class="form-group">
         <label class="form-label">Due Date</label>
@@ -982,12 +619,9 @@
         </div>
       </div>
     </div>
-
     <div class="form-group">
       <label class="form-label">Sub-tasks</label>
       <div class="subtask-builder">
-
-        <!-- Row 1: text + type + add button -->
         <div class="subtask-main-row">
           <input class="form-input" id="stText" placeholder="Sub-task description">
           <select class="form-select" id="stType" style="width:130px">
@@ -997,70 +631,43 @@
           </select>
           <button class="btn" onclick="addSubtask()">+ Add</button>
         </div>
-
-        <!-- Row 2: assignee + dependency + due date -->
         <div class="subtask-meta-row">
           <span class="subtask-meta-label">Assigned to</span>
           <select class="form-select" id="stAssignee" onchange="handleStAssigneeChange()">
             <option value="">— none —</option>
-            <option value="me">Me</option>
-            <option value="aj">AJ</option>
-            <option value="cj">CJ</option>
-            <option value="jason">Jason</option>
-            <option value="steve">Steve</option>
-            <option value="jane">Jane</option>
-            <option value="saile">Saile</option>
-            <option value="elias">Elias</option>
-            <option value="aj-team">AJ — Team</option>
-            <option value="cj-team">CJ — Team</option>
-            <option value="jason-team">Jason — Team</option>
-            <option value="steve-team">Steve — Team</option>
-            <option value="jane-team">Jane — Team</option>
-            <option value="saile-team">Saile — Team</option>
-            <option value="elias-team">Elias — Team</option>
-            <option value="it">IT Team</option>
-            <option value="digital">Digital Team</option>
-            <option value="other">Other</option>
+            <option value="me">Me</option><option value="aj">AJ</option><option value="cj">CJ</option>
+            <option value="jason">Jason</option><option value="steve">Steve</option><option value="jane">Jane</option>
+            <option value="saile">Saile</option><option value="elias">Elias</option>
+            <option value="aj-team">AJ — Team</option><option value="cj-team">CJ — Team</option>
+            <option value="jason-team">Jason — Team</option><option value="steve-team">Steve — Team</option>
+            <option value="jane-team">Jane — Team</option><option value="saile-team">Saile — Team</option>
+            <option value="elias-team">Elias — Team</option><option value="it">IT Team</option>
+            <option value="digital">Digital Team</option><option value="other">Other</option>
           </select>
           <input class="form-input" id="stAssigneeOther" placeholder="Specify…" style="display:none;max-width:140px">
-
           <span class="subtask-meta-label">Depends on</span>
           <select class="form-select" id="stDependency" onchange="handleStDependencyChange()">
             <option value="">— none —</option>
-            <option value="me">Me</option>
-            <option value="aj">AJ</option>
-            <option value="cj">CJ</option>
-            <option value="jason">Jason</option>
-            <option value="steve">Steve</option>
-            <option value="jane">Jane</option>
-            <option value="saile">Saile</option>
-            <option value="elias">Elias</option>
-            <option value="aj-team">AJ — Team</option>
-            <option value="cj-team">CJ — Team</option>
-            <option value="jason-team">Jason — Team</option>
-            <option value="steve-team">Steve — Team</option>
-            <option value="jane-team">Jane — Team</option>
-            <option value="saile-team">Saile — Team</option>
-            <option value="elias-team">Elias — Team</option>
-            <option value="it">IT Team</option>
-            <option value="digital">Digital Team</option>
-            <option value="other">Other</option>
+            <option value="me">Me</option><option value="aj">AJ</option><option value="cj">CJ</option>
+            <option value="jason">Jason</option><option value="steve">Steve</option><option value="jane">Jane</option>
+            <option value="saile">Saile</option><option value="elias">Elias</option>
+            <option value="aj-team">AJ — Team</option><option value="cj-team">CJ — Team</option>
+            <option value="jason-team">Jason — Team</option><option value="steve-team">Steve — Team</option>
+            <option value="jane-team">Jane — Team</option><option value="saile-team">Saile — Team</option>
+            <option value="elias-team">Elias — Team</option><option value="it">IT Team</option>
+            <option value="digital">Digital Team</option><option value="other">Other</option>
           </select>
           <input class="form-input" id="stDependencyOther" placeholder="Specify…" style="display:none;max-width:140px">
-
           <span class="subtask-meta-label">Due</span>
           <input class="form-input" type="date" id="stDue" style="max-width:150px">
         </div>
-
         <div class="added-subtasks" id="addedSubtasks"></div>
       </div>
     </div>
-
     <div class="form-group">
       <label class="form-label">Update Note</label>
       <textarea class="form-textarea" id="fNote" placeholder="Add a note (will be timestamped)" style="min-height:60px"></textarea>
     </div>
-
     <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:8px">
       <button class="btn" onclick="closeModal('taskModal')">Cancel</button>
       <button class="btn primary" onclick="saveTask()">Save Task</button>
@@ -1075,31 +682,23 @@
       <span>↑ Import Tasks from JSON</span>
       <button class="modal-close" onclick="closeModal('importModal')">✕</button>
     </div>
-
     <div style="margin-bottom:16px;font-size:13px;color:var(--text2);line-height:1.6">
-      Upload the <code style="background:var(--surface3);padding:2px 6px;border-radius:4px;font-family:'DM Mono',monospace;font-size:12px">.json</code> file generated by the TeamTrack skill in Claude. Tasks will be shown below for review before anything is saved.
+      Upload the <code style="background:var(--surface3);padding:2px 6px;border-radius:4px;font-family:'DM Mono',monospace;font-size:12px">.json</code> file generated by the TeamTrack skill in Claude.
     </div>
-
-    <div id="importDropZone"
-      style="border:2px dashed var(--border2);border-radius:var(--radius-lg);padding:36px;text-align:center;cursor:pointer;transition:all 0.2s;margin-bottom:16px"
+    <div id="importDropZone" style="border:2px dashed var(--border2);border-radius:var(--radius-lg);padding:36px;text-align:center;cursor:pointer;transition:all 0.2s;margin-bottom:16px"
       onclick="document.getElementById('jsonFileInput').click()"
-      ondragover="handleJsonDragOver(event)"
-      ondrop="handleJsonDrop(event)">
+      ondragover="handleJsonDragOver(event)" ondrop="handleJsonDrop(event)">
       <div style="font-size:28px;margin-bottom:8px">📄</div>
       <div style="font-size:14px;color:var(--text2);font-weight:500">Drop your tasks.json here</div>
       <div style="font-size:12px;color:var(--text3);margin-top:4px">or click to browse</div>
       <input type="file" id="jsonFileInput" accept=".json,application/json" style="display:none" onchange="handleJsonFileSelect(event)">
     </div>
-
     <div id="importFileName" style="display:none;font-size:12px;font-family:'DM Mono',monospace;color:var(--done);margin-bottom:12px;padding:8px 12px;background:rgba(52,211,153,0.08);border-radius:var(--radius);border:1px solid rgba(52,211,153,0.2)"></div>
-
     <div id="importError" style="display:none;font-size:12px;color:var(--critical);margin-bottom:12px;padding:8px 12px;background:rgba(255,77,106,0.08);border-radius:var(--radius);border:1px solid rgba(255,77,106,0.2)"></div>
-
     <div id="importResults" style="display:none">
       <div class="section-header">Review Tasks</div>
       <div id="extractedTasksList"></div>
     </div>
-
     <div style="display:flex;gap:10px;justify-content:flex-end;margin-top:16px">
       <button class="btn" onclick="closeModal('importModal')">Cancel</button>
       <button class="btn primary" id="addExtractedBtn" style="display:none" onclick="addExtractedTasks()">Add Selected to Tracker</button>
@@ -1107,13 +706,10 @@
   </div>
 </div>
 
-<!-- UPDATE NOTE MODAL -->
+<!-- NOTE MODAL -->
 <div class="modal-overlay" id="noteModal">
   <div class="modal" style="max-width:480px">
-    <div class="modal-title">
-      Add Update Note
-      <button class="modal-close" onclick="closeModal('noteModal')">✕</button>
-    </div>
+    <div class="modal-title">Add Update Note<button class="modal-close" onclick="closeModal('noteModal')">✕</button></div>
     <div class="form-group">
       <textarea class="form-textarea" id="noteText" placeholder="What's the latest update?" style="min-height:100px"></textarea>
     </div>
@@ -1137,11 +733,10 @@
 
 <script>
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
-const GITHUB_TOKEN = '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';
-const GITHUB_REPO = 'bryan-bn/teamtrack';
-const GITHUB_FILE = 'tasks.json';
-const GITHUB_API_URL = `https://api.github.com/repos/${GITHUB_REPO}/contents/${GITHUB_FILE}`;
-const GITHUB_RAW_URL = `https://raw.githubusercontent.com/${GITHUB_REPO}/main/${GITHUB_FILE}`;
+const NOTION_TOKEN = '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';
+const NOTION_DB_ID = 'cb23f264-4fa5-4948-a313-60bd601df298';
+const NOTION_API = 'https://api.notion.com/v1';
+const NOTION_VERSION = '2022-06-28';
 
 // ─── STATE ────────────────────────────────────────────────────────────────────
 let tasks = [];
@@ -1151,6 +746,7 @@ let extractedTasks = [];
 let noteTargetId = null;
 let activeFilters = { urgent: false, important: false, hideDone: false };
 let saveTimeout = null;
+let summaryEmailBodies = {};
 
 // ─── OWNERS ───────────────────────────────────────────────────────────────────
 const OWNER_LABELS = {
@@ -1161,65 +757,154 @@ const OWNER_LABELS = {
   it:'IT Team', digital:'Digital Team', other:'Other'
 };
 
-// ─── GITHUB STORAGE ───────────────────────────────────────────────────────────
-async function loadFromGitHub() {
+// ─── NOTION STORAGE ───────────────────────────────────────────────────────────
+function notionHeaders() {
+  return {
+    'Authorization': `Bearer ${NOTION_TOKEN}`,
+    'Notion-Version': NOTION_VERSION,
+    'Content-Type': 'application/json'
+  };
+}
+
+function notionPageToTask(page) {
+  const p = page.properties;
+  const subtasksRaw = p['Subtasks']?.rich_text?.[0]?.plain_text || '';
+  const updatesRaw = p['Updates']?.rich_text?.[0]?.plain_text || '';
+
+  let subtasks = [];
+  try { subtasks = subtasksRaw ? JSON.parse(subtasksRaw) : []; } catch(e) { subtasks = []; }
+
+  let updates = [];
+  try { updates = updatesRaw ? JSON.parse(updatesRaw) : []; } catch(e) { updates = []; }
+
+  return {
+    id: p['Task ID']?.rich_text?.[0]?.plain_text || page.id,
+    notionId: page.id,
+    title: p['Title']?.title?.[0]?.plain_text || '',
+    description: p['Description']?.rich_text?.[0]?.plain_text || '',
+    owner: p['Owner']?.select?.name || 'me',
+    category: p['Category']?.rich_text?.[0]?.plain_text || '',
+    status: p['Status']?.select?.name || 'Open',
+    priority: p['Priority']?.select?.name || 'Medium',
+    dueDate: p['Due Date']?.date?.start || '',
+    urgent: p['Urgent']?.checkbox || false,
+    important: p['Important']?.checkbox || false,
+    subtasks,
+    updates,
+    createdAt: new Date(page.created_time).getTime()
+  };
+}
+
+function taskToNotionProperties(task) {
+  const props = {
+    'Title': { title: [{ text: { content: task.title } }] },
+    'Description': { rich_text: [{ text: { content: task.description || '' } }] },
+    'Owner': { select: { name: task.owner || 'me' } },
+    'Category': { rich_text: [{ text: { content: task.category || '' } }] },
+    'Status': { select: { name: task.status || 'Open' } },
+    'Priority': { select: { name: task.priority || 'Medium' } },
+    'Urgent': { checkbox: !!task.urgent },
+    'Important': { checkbox: !!task.important },
+    'Task ID': { rich_text: [{ text: { content: task.id } }] },
+    'Subtasks': { rich_text: [{ text: { content: JSON.stringify(task.subtasks || []) } }] },
+    'Updates': { rich_text: [{ text: { content: JSON.stringify(task.updates || []) } }] }
+  };
+  if (task.dueDate) {
+    props['Due Date'] = { date: { start: task.dueDate } };
+  } else {
+    props['Due Date'] = { date: null };
+  }
+  return props;
+}
+
+async function loadFromNotion() {
   try {
     setSyncStatus('syncing', 'loading…');
     const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 8000);
-    // Use raw URL for reading -- fast, no auth needed on public repo
-    const res = await fetch(`${GITHUB_RAW_URL}?t=${Date.now()}`, {
-      signal: controller.signal
-    });
-    clearTimeout(timeout);
-    if (!res.ok) throw new Error(res.status);
-    const data = await res.json();
-    tasks = data.tasks || [];
+    const timeout = setTimeout(() => controller.abort(), 15000);
+
+    let allPages = [];
+    let hasMore = true;
+    let cursor = undefined;
+
+    while (hasMore) {
+      const body = { page_size: 100 };
+      if (cursor) body.start_cursor = cursor;
+
+      const res = await fetch(`${NOTION_API}/databases/${NOTION_DB_ID}/query`, {
+        method: 'POST',
+        headers: notionHeaders(),
+        body: JSON.stringify(body),
+        signal: controller.signal
+      });
+      clearTimeout(timeout);
+      if (!res.ok) throw new Error(await res.text());
+      const data = await res.json();
+      allPages = allPages.concat(data.results);
+      hasMore = data.has_more;
+      cursor = data.next_cursor;
+    }
+
+    tasks = allPages.map(notionPageToTask).sort((a,b) => (b.createdAt||0) - (a.createdAt||0));
     setSyncStatus('synced', 'synced');
     return true;
   } catch(e) {
     setSyncStatus('error', e.name === 'AbortError' ? 'timed out' : 'load failed');
-    showToast(e.name === 'AbortError' ? 'Load timed out — working offline' : 'Could not load tasks', 'error');
+    showToast(e.name === 'AbortError' ? 'Load timed out' : 'Could not load from Notion', 'error');
     return false;
   }
 }
 
-async function saveToGitHub() {
+async function createNotionPage(task) {
+  const res = await fetch(`${NOTION_API}/pages`, {
+    method: 'POST',
+    headers: notionHeaders(),
+    body: JSON.stringify({
+      parent: { database_id: NOTION_DB_ID },
+      properties: taskToNotionProperties(task)
+    })
+  });
+  if (!res.ok) throw new Error(await res.text());
+  const page = await res.json();
+  return page.id;
+}
+
+async function updateNotionPage(notionId, task) {
+  const res = await fetch(`${NOTION_API}/pages/${notionId}`, {
+    method: 'PATCH',
+    headers: notionHeaders(),
+    body: JSON.stringify({ properties: taskToNotionProperties(task) })
+  });
+  if (!res.ok) throw new Error(await res.text());
+}
+
+async function deleteNotionPage(notionId) {
+  await fetch(`${NOTION_API}/pages/${notionId}`, {
+    method: 'PATCH',
+    headers: notionHeaders(),
+    body: JSON.stringify({ archived: true })
+  });
+}
+
+async function saveTask_Notion(task) {
   setSyncStatus('syncing', 'saving…');
   try {
-    // Get current SHA (required for updates)
-    const shaRes = await fetch(GITHUB_API_URL, {
-      headers: { 'Authorization': `token ${GITHUB_TOKEN}` }
-    });
-    const shaData = await shaRes.json();
-    const sha = shaData.sha;
-
-    const content = btoa(unescape(encodeURIComponent(JSON.stringify({ tasks }, null, 2))));
-    const res = await fetch(GITHUB_API_URL, {
-      method: 'PUT',
-      headers: {
-        'Authorization': `token ${GITHUB_TOKEN}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        message: 'Update tasks',
-        content,
-        sha
-      })
-    });
-    if (!res.ok) throw new Error(res.status);
+    if (task.notionId) {
+      await updateNotionPage(task.notionId, task);
+    } else {
+      const notionId = await createNotionPage(task);
+      task.notionId = notionId;
+    }
     setSyncStatus('synced', 'saved');
-    return true;
   } catch(e) {
     setSyncStatus('error', 'save failed');
-    showToast('Could not save tasks', 'error');
-    return false;
+    showToast('Could not save to Notion', 'error');
   }
 }
 
-function scheduleSave() {
+function scheduleSave(task) {
   clearTimeout(saveTimeout);
-  saveTimeout = setTimeout(() => saveToGitHub(), 400);
+  saveTimeout = setTimeout(() => saveTask_Notion(task), 600);
 }
 
 function setSyncStatus(state, text) {
@@ -1263,16 +948,12 @@ function renderTasks() {
   });
 
   renderStats();
-
   const list = document.getElementById('taskList');
+
   if (!filtered.length) {
     list.innerHTML = tasks.length
       ? `<div class="no-results">No tasks match your filters.</div>`
-      : `<div class="empty-state">
-          <div class="empty-state-icon">◎</div>
-          <div class="empty-state-title">No tasks yet</div>
-          <div class="empty-state-text">Add your first task or import a JSON file generated by the TeamTrack skill.</div>
-        </div>`;
+      : `<div class="empty-state"><div class="empty-state-icon">◎</div><div class="empty-state-title">No tasks yet</div><div class="empty-state-text">Add your first task or import a JSON file.</div></div>`;
     return;
   }
 
@@ -1354,11 +1035,7 @@ function renderTaskDetail(t) {
 
     ${updates.length ? `
     <div class="section-header">Updates</div>
-    ${updates.map(u=>`
-      <div class="update-item">
-        <div class="update-date">${u.date}</div>
-        <div>${escHtml(u.text)}</div>
-      </div>`).join('')}` : ''}
+    ${updates.map(u=>`<div class="update-item"><div class="update-date">${u.date}</div><div>${escHtml(u.text)}</div></div>`).join('')}` : ''}
 
     <div class="task-actions">
       <button class="btn" onclick="openEditModal('${t.id}')">✎ Edit</button>
@@ -1377,30 +1054,14 @@ function renderStats() {
   });
 
   document.getElementById('statsBar').innerHTML = `
-    <div class="stat-item" onclick="setFilter('status','')">
-      <span class="stat-num">${tasks.length}</span> Total
-    </div>
-    <div class="stat-item" onclick="setFilter('status','Open')">
-      <span class="stat-num open">${counts['Open']}</span> Open
-    </div>
-    <div class="stat-item" onclick="setFilter('status','In Progress')">
-      <span class="stat-num inprogress">${counts['In Progress']}</span> In Progress
-    </div>
-    <div class="stat-item" onclick="setFilter('status','Waiting')">
-      <span class="stat-num waiting">${counts['Waiting']}</span> Waiting
-    </div>
-    <div class="stat-item" onclick="setFilter('status','Behind')">
-      <span class="stat-num behind">${counts['Behind']}</span> Behind
-    </div>
-    <div class="stat-item" onclick="setFilter('status','Done')">
-      <span class="stat-num done">${counts['Done']}</span> Done
-    </div>
-    <div class="stat-item" onclick="toggleFilter('urgent')">
-      <span class="stat-num urgent">${urgent}</span> 🔥 Urgent
-    </div>
-    <div class="stat-item" onclick="toggleFilter('important')">
-      <span class="stat-num important">${important}</span> ⭐ Important
-    </div>`;
+    <div class="stat-item" onclick="setFilter('status','')"><span class="stat-num">${tasks.length}</span> Total</div>
+    <div class="stat-item" onclick="setFilter('status','Open')"><span class="stat-num open">${counts['Open']}</span> Open</div>
+    <div class="stat-item" onclick="setFilter('status','In Progress')"><span class="stat-num inprogress">${counts['In Progress']}</span> In Progress</div>
+    <div class="stat-item" onclick="setFilter('status','Waiting')"><span class="stat-num waiting">${counts['Waiting']}</span> Waiting</div>
+    <div class="stat-item" onclick="setFilter('status','Behind')"><span class="stat-num behind">${counts['Behind']}</span> Behind</div>
+    <div class="stat-item" onclick="setFilter('status','Done')"><span class="stat-num done">${counts['Done']}</span> Done</div>
+    <div class="stat-item" onclick="toggleFilter('urgent')"><span class="stat-num urgent">${urgent}</span> 🔥 Urgent</div>
+    <div class="stat-item" onclick="toggleFilter('important')"><span class="stat-num important">${important}</span> ⭐ Important</div>`;
 }
 
 function setFilter(type, val) {
@@ -1470,7 +1131,6 @@ function openEditModal(id) {
   document.getElementById('fTitle').value = t.title;
   document.getElementById('fDesc').value = t.description||'';
   document.getElementById('fOwner').value = t.owner||'me';
-  // handle legacy other
   if (t.owner && !OWNER_LABELS[t.owner]) {
     document.getElementById('fOwner').value = 'other';
     document.getElementById('fOwnerOther').value = t.owner;
@@ -1498,15 +1158,12 @@ function handleOwnerChange() {
   if (sel.value !== 'other') other.value = '';
 }
 
-function saveTask() {
+async function saveTask() {
   const title = document.getElementById('fTitle').value.trim();
   if (!title) { showToast('Title is required', 'error'); return; }
 
   const ownerSel = document.getElementById('fOwner').value;
-  const owner = ownerSel === 'other'
-    ? (document.getElementById('fOwnerOther').value.trim() || 'other')
-    : ownerSel;
-
+  const owner = ownerSel === 'other' ? (document.getElementById('fOwnerOther').value.trim() || 'other') : ownerSel;
   const noteText = document.getElementById('fNote').value.trim();
   const now = new Date();
   const dateStr = now.toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
@@ -1525,11 +1182,15 @@ function saveTask() {
     t.important = document.getElementById('fImportant').checked;
     t.subtasks = newSubtasks;
     if (noteText) { t.updates = t.updates||[]; t.updates.push({ date: dateStr, text: noteText }); }
+    closeModal('taskModal');
+    renderTasks();
+    await saveTask_Notion(t);
     showToast('Task updated', 'success');
   } else {
     const newTask = {
       id: 'task_' + Date.now() + '_' + Math.random().toString(36).slice(2,6),
-      title, description: document.getElementById('fDesc').value.trim(),
+      title,
+      description: document.getElementById('fDesc').value.trim(),
       owner,
       category: document.getElementById('fCategory').value.trim(),
       status: document.getElementById('fStatus').value,
@@ -1542,36 +1203,45 @@ function saveTask() {
       createdAt: Date.now()
     };
     tasks.unshift(newTask);
+    closeModal('taskModal');
+    renderTasks();
+    await saveTask_Notion(newTask);
     showToast('Task added', 'success');
   }
-
-  closeModal('taskModal');
-  renderTasks();
-  scheduleSave();
 }
 
-function deleteTask(id) {
+async function deleteTask(id) {
   if (!confirm('Delete this task?')) return;
-  tasks = tasks.filter(t => t.id !== id);
+  const t = tasks.find(x => x.id === id);
+  tasks = tasks.filter(x => x.id !== id);
   renderTasks();
-  scheduleSave();
   showToast('Task deleted', 'info');
+  if (t && t.notionId) {
+    try {
+      setSyncStatus('syncing', 'deleting…');
+      await deleteNotionPage(t.notionId);
+      setSyncStatus('synced', 'saved');
+    } catch(e) {
+      setSyncStatus('error', 'delete failed');
+      showToast('Could not delete from Notion', 'error');
+    }
+  }
 }
 
-function quickUpdate(id, field, val) {
+async function quickUpdate(id, field, val) {
   const t = tasks.find(x => x.id === id);
   if (!t) return;
   t[field] = val;
   renderTasks();
-  scheduleSave();
+  await saveTask_Notion(t);
 }
 
-function quickUpdateSubtask(taskId, subtaskIndex, status) {
+async function quickUpdateSubtask(taskId, subtaskIndex, status) {
   const t = tasks.find(x => x.id === taskId);
   if (!t || !t.subtasks[subtaskIndex]) return;
   t.subtasks[subtaskIndex].status = status;
   renderTasks();
-  scheduleSave();
+  await saveTask_Notion(t);
 }
 
 // ─── SUBTASKS ─────────────────────────────────────────────────────────────────
@@ -1604,34 +1274,16 @@ function resetSubtaskFields() {
 function addSubtask() {
   const text = document.getElementById('stText').value.trim();
   if (!text) return;
-
   const assigneeSel = document.getElementById('stAssignee').value;
-  const assignee = assigneeSel === 'other'
-    ? (document.getElementById('stAssigneeOther').value.trim() || 'Other')
-    : assigneeSel;
-
+  const assignee = assigneeSel === 'other' ? (document.getElementById('stAssigneeOther').value.trim() || 'Other') : assigneeSel;
   const depSel = document.getElementById('stDependency').value;
-  const dependency = depSel === 'other'
-    ? (document.getElementById('stDependencyOther').value.trim() || 'Other')
-    : depSel;
-
-  newSubtasks.push({
-    text,
-    type: document.getElementById('stType').value,
-    status: 'Open',
-    assignee: assignee || '',
-    dependency: dependency || '',
-    dueDate: document.getElementById('stDue').value
-  });
-
+  const dependency = depSel === 'other' ? (document.getElementById('stDependencyOther').value.trim() || 'Other') : depSel;
+  newSubtasks.push({ text, type: document.getElementById('stType').value, status: 'Open', assignee: assignee || '', dependency: dependency || '', dueDate: document.getElementById('stDue').value });
   resetSubtaskFields();
   renderNewSubtasks();
 }
 
-function removeNewSubtask(i) {
-  newSubtasks.splice(i, 1);
-  renderNewSubtasks();
-}
+function removeNewSubtask(i) { newSubtasks.splice(i, 1); renderNewSubtasks(); }
 
 function renderNewSubtasks() {
   document.getElementById('addedSubtasks').innerHTML = newSubtasks.map((st, i) => {
@@ -1655,7 +1307,7 @@ function openNoteModal(id) {
   openModal('noteModal');
 }
 
-function saveNote() {
+async function saveNote() {
   const text = document.getElementById('noteText').value.trim();
   if (!text) return;
   const t = tasks.find(x => x.id === noteTargetId);
@@ -1666,11 +1318,10 @@ function saveNote() {
   t.updates.push({ date: dateStr, text });
   closeModal('noteModal');
   renderTasks();
-  scheduleSave();
+  await saveTask_Notion(t);
   showToast('Note added', 'success');
 }
 
-// ─── AI IMPORT ────────────────────────────────────────────────────────────────
 // ─── JSON FILE IMPORT ─────────────────────────────────────────────────────────
 function openImportModal() {
   extractedTasks = [];
@@ -1709,18 +1360,15 @@ function processJsonFile(file) {
   const fileNameEl = document.getElementById('importFileName');
   errorEl.style.display = 'none';
   fileNameEl.style.display = 'none';
-
   if (!file.name.endsWith('.json') && file.type !== 'application/json') {
     errorEl.textContent = 'File must be a .json file.';
     errorEl.style.display = 'block';
     return;
   }
-
   const reader = new FileReader();
   reader.onload = ev => {
     try {
       const parsed = JSON.parse(ev.target.result);
-      // accept either an array or { tasks: [...] }
       const raw = Array.isArray(parsed) ? parsed : (parsed.tasks || []);
       if (!raw.length) throw new Error('No tasks found in file.');
       extractedTasks = raw;
@@ -1730,8 +1378,6 @@ function processJsonFile(file) {
     } catch(err) {
       errorEl.textContent = `Could not parse file: ${err.message}`;
       errorEl.style.display = 'block';
-      document.getElementById('importResults').style.display = 'none';
-      document.getElementById('addExtractedBtn').style.display = 'none';
     }
   };
   reader.readAsText(file);
@@ -1763,13 +1409,13 @@ function renderExtractedTasks() {
   document.getElementById('addExtractedBtn').style.display = '';
 }
 
-function addExtractedTasks() {
+async function addExtractedTasks() {
   const checkboxes = document.querySelectorAll('[id^="ext-"]');
-  let added = 0;
+  let toAdd = [];
   checkboxes.forEach((cb, i) => {
     if (!cb.checked) return;
     const t = extractedTasks[i];
-    tasks.unshift({
+    toAdd.push({
       id: 'task_' + Date.now() + '_' + Math.random().toString(36).slice(2,6) + i,
       title: t.title||'Untitled',
       description: t.description||'',
@@ -1784,17 +1430,16 @@ function addExtractedTasks() {
       updates: [],
       createdAt: Date.now()
     });
-    added++;
   });
+  tasks.unshift(...toAdd);
   closeModal('importModal');
   renderTasks();
-  scheduleSave();
-  showToast(`Added ${added} task${added!==1?'s':''}`, 'success');
+  showToast(`Adding ${toAdd.length} task${toAdd.length!==1?'s':''}…`, 'info');
+  for (const t of toAdd) await saveTask_Notion(t);
+  showToast(`Added ${toAdd.length} task${toAdd.length!==1?'s':''}`, 'success');
 }
 
 // ─── SUMMARY ──────────────────────────────────────────────────────────────────
-let summaryEmailBodies = {};
-
 function openSummaryModal() {
   summaryEmailBodies = {};
   document.getElementById('summaryContent').innerHTML = buildSummaryHTML();
@@ -1804,22 +1449,9 @@ function openSummaryModal() {
 function buildSummaryHTML() {
   if (!tasks.length) return '<div style="color:var(--text3);text-align:center;padding:40px">No tasks yet.</div>';
 
-  const STATUS_COLORS = {
-    'Open': 'color:var(--open)',
-    'In Progress': 'color:var(--inprogress)',
-    'Waiting': 'color:var(--waiting)',
-    'Done': 'color:var(--done)',
-    'Behind': 'color:var(--behind)'
-  };
+  const STATUS_COLORS = { 'Open':'color:var(--open)', 'In Progress':'color:var(--inprogress)', 'Waiting':'color:var(--waiting)', 'Done':'color:var(--done)', 'Behind':'color:var(--behind)' };
+  const PRIO_COLORS = { 'Critical':'background:rgba(255,77,106,0.15);color:var(--critical)', 'High':'background:rgba(255,140,66,0.15);color:var(--high)', 'Medium':'background:rgba(245,200,66,0.12);color:var(--medium)', 'Low':'background:rgba(107,114,128,0.15);color:var(--low)' };
 
-  const PRIO_COLORS = {
-    'Critical': 'background:rgba(255,77,106,0.15);color:var(--critical)',
-    'High': 'background:rgba(255,140,66,0.15);color:var(--high)',
-    'Medium': 'background:rgba(245,200,66,0.12);color:var(--medium)',
-    'Low': 'background:rgba(107,114,128,0.15);color:var(--low)'
-  };
-
-  // ── Board-level stats ──
   const total = tasks.length;
   const counts = { Open:0, 'In Progress':0, Waiting:0, Done:0, Behind:0 };
   let urgent = 0, important = 0, overdue = 0;
@@ -1829,182 +1461,100 @@ function buildSummaryHTML() {
     if (counts[t.status] !== undefined) counts[t.status]++;
     if (t.urgent) urgent++;
     if (t.important) important++;
-    if (t.dueDate) {
-      const due = new Date(t.dueDate + 'T00:00:00');
-      if (due < today && t.status !== 'Done') overdue++;
-    }
+    if (t.dueDate) { const due = new Date(t.dueDate + 'T00:00:00'); if (due < today && t.status !== 'Done') overdue++; }
   });
 
-  // subtask completion
   let totalSubs = 0, doneSubs = 0;
-  tasks.forEach(t => {
-    (t.subtasks||[]).forEach(st => {
-      totalSubs++;
-      if (st.status === 'Done') doneSubs++;
-    });
-  });
+  tasks.forEach(t => { (t.subtasks||[]).forEach(st => { totalSubs++; if (st.status === 'Done') doneSubs++; }); });
   const subRate = totalSubs ? Math.round((doneSubs / totalSubs) * 100) : null;
 
   const boardHTML = `
     <div class="section-header">Board Overview</div>
     <div class="summary-board-grid">
-      <div class="summary-stat-card">
-        <div class="summary-stat-num">${total}</div>
-        <div class="summary-stat-label">Total</div>
-      </div>
-      <div class="summary-stat-card">
-        <div class="summary-stat-num" style="color:var(--open)">${counts['Open']}</div>
-        <div class="summary-stat-label">Open</div>
-      </div>
-      <div class="summary-stat-card">
-        <div class="summary-stat-num" style="color:var(--inprogress)">${counts['In Progress']}</div>
-        <div class="summary-stat-label">In Progress</div>
-      </div>
-      <div class="summary-stat-card">
-        <div class="summary-stat-num" style="color:var(--waiting)">${counts['Waiting']}</div>
-        <div class="summary-stat-label">Waiting</div>
-      </div>
-      <div class="summary-stat-card">
-        <div class="summary-stat-num" style="color:var(--behind)">${counts['Behind']}</div>
-        <div class="summary-stat-label">Behind</div>
-      </div>
-      <div class="summary-stat-card">
-        <div class="summary-stat-num" style="color:var(--done)">${counts['Done']}</div>
-        <div class="summary-stat-label">Done</div>
-      </div>
-      <div class="summary-stat-card">
-        <div class="summary-stat-num" style="color:var(--critical)">${overdue}</div>
-        <div class="summary-stat-label">Overdue</div>
-      </div>
-      <div class="summary-stat-card">
-        <div class="summary-stat-num" style="color:var(--urgent)">${urgent}</div>
-        <div class="summary-stat-label">🔥 Urgent</div>
-      </div>
-      <div class="summary-stat-card">
-        <div class="summary-stat-num" style="color:var(--important)">${important}</div>
-        <div class="summary-stat-label">⭐ Important</div>
-      </div>
-      ${subRate !== null ? `<div class="summary-stat-card">
-        <div class="summary-stat-num" style="color:var(--done)">${subRate}%</div>
-        <div class="summary-stat-label">Sub-tasks Done</div>
-      </div>` : ''}
+      <div class="summary-stat-card"><div class="summary-stat-num">${total}</div><div class="summary-stat-label">Total</div></div>
+      <div class="summary-stat-card"><div class="summary-stat-num" style="color:var(--open)">${counts['Open']}</div><div class="summary-stat-label">Open</div></div>
+      <div class="summary-stat-card"><div class="summary-stat-num" style="color:var(--inprogress)">${counts['In Progress']}</div><div class="summary-stat-label">In Progress</div></div>
+      <div class="summary-stat-card"><div class="summary-stat-num" style="color:var(--waiting)">${counts['Waiting']}</div><div class="summary-stat-label">Waiting</div></div>
+      <div class="summary-stat-card"><div class="summary-stat-num" style="color:var(--behind)">${counts['Behind']}</div><div class="summary-stat-label">Behind</div></div>
+      <div class="summary-stat-card"><div class="summary-stat-num" style="color:var(--done)">${counts['Done']}</div><div class="summary-stat-label">Done</div></div>
+      <div class="summary-stat-card"><div class="summary-stat-num" style="color:var(--critical)">${overdue}</div><div class="summary-stat-label">Overdue</div></div>
+      <div class="summary-stat-card"><div class="summary-stat-num" style="color:var(--urgent)">${urgent}</div><div class="summary-stat-label">🔥 Urgent</div></div>
+      <div class="summary-stat-card"><div class="summary-stat-num" style="color:var(--important)">${important}</div><div class="summary-stat-label">⭐ Important</div></div>
+      ${subRate !== null ? `<div class="summary-stat-card"><div class="summary-stat-num" style="color:var(--done)">${subRate}%</div><div class="summary-stat-label">Sub-tasks Done</div></div>` : ''}
     </div>`;
 
-  // ── Per-owner breakdown ──
   const ownerMap = {};
-  tasks.forEach(t => {
-    const key = t.owner || 'me';
-    if (!ownerMap[key]) ownerMap[key] = [];
-    ownerMap[key].push(t);
-  });
+  tasks.forEach(t => { const key = t.owner || 'me'; if (!ownerMap[key]) ownerMap[key] = []; ownerMap[key].push(t); });
 
-  const ownersHTML = Object.entries(ownerMap)
-    .sort((a,b) => b[1].length - a[1].length)
-    .map(([ownerKey, ownerTasks]) => {
-      const ownerName = OWNER_LABELS[ownerKey] || ownerKey;
-      const oTotal = ownerTasks.length;
-      const oCounts = { Open:0, 'In Progress':0, Waiting:0, Done:0, Behind:0 };
-      let oOverdue = 0, oUrgent = 0;
-      ownerTasks.forEach(t => {
-        if (oCounts[t.status] !== undefined) oCounts[t.status]++;
-        if (t.urgent) oUrgent++;
-        if (t.dueDate) {
-          const due = new Date(t.dueDate + 'T00:00:00');
-          if (due < today && t.status !== 'Done') oOverdue++;
-        }
-      });
+  const ownersHTML = Object.entries(ownerMap).sort((a,b) => b[1].length - a[1].length).map(([ownerKey, ownerTasks]) => {
+    const ownerName = OWNER_LABELS[ownerKey] || ownerKey;
+    const oTotal = ownerTasks.length;
+    const oCounts = { Open:0, 'In Progress':0, Waiting:0, Done:0, Behind:0 };
+    let oOverdue = 0, oUrgent = 0;
+    ownerTasks.forEach(t => {
+      if (oCounts[t.status] !== undefined) oCounts[t.status]++;
+      if (t.urgent) oUrgent++;
+      if (t.dueDate) { const due = new Date(t.dueDate + 'T00:00:00'); if (due < today && t.status !== 'Done') oOverdue++; }
+    });
+    let oSubs = 0, oDone = 0;
+    ownerTasks.forEach(t => { (t.subtasks||[]).forEach(st => { oSubs++; if (st.status === 'Done') oDone++; }); });
 
-      // subtask rate for owner
-      let oSubs = 0, oDone = 0;
-      ownerTasks.forEach(t => {
-        (t.subtasks||[]).forEach(st => { oSubs++; if (st.status === 'Done') oDone++; });
-      });
+    const statBadges = Object.entries(oCounts).filter(([,v]) => v > 0).map(([s,v]) => `<span class="summary-mini-badge" style="background:var(--surface3);${STATUS_COLORS[s]}">${v} ${s}</span>`).join('');
 
-      const statBadges = Object.entries(oCounts)
-        .filter(([,v]) => v > 0)
-        .map(([s,v]) => `<span class="summary-mini-badge" style="background:var(--surface3);${STATUS_COLORS[s]}">${v} ${s}</span>`)
-        .join('');
-
-      const taskRows = ownerTasks
-        .slice()
-        .sort((a,b) => {
-          const PO = { Critical:0, High:1, Medium:2, Low:3 };
-          return (PO[a.priority]||2) - (PO[b.priority]||2);
-        })
-        .map(t => {
-          const overdueMark = t.dueDate && new Date(t.dueDate+'T00:00:00') < today && t.status !== 'Done'
-            ? `<span style="color:var(--critical);font-size:10px">overdue</span>` : '';
-          return `<div class="summary-task-row">
-            <span class="summary-mini-badge" style="${PRIO_COLORS[t.priority]||''}">${t.priority||'Med'}</span>
-            <span class="summary-mini-badge" style="background:var(--surface3);${STATUS_COLORS[t.status]||''}">${t.status||'Open'}</span>
-            <span class="summary-task-title">${escHtml(t.title)}</span>
-            ${overdueMark}
-            ${t.urgent ? '<span style="font-size:11px">🔥</span>' : ''}
-            ${t.important ? '<span style="font-size:11px">⭐</span>' : ''}
-          </div>`;
-        }).join('');
-
-      const emailBody = buildOwnerEmailBody(ownerName, ownerTasks, oCounts, oOverdue, oUrgent, oSubs, oDone);
-      const inputId = `email-${ownerKey.replace(/[^a-z0-9]/gi,'_')}`;
-      const bodyId = `body-${ownerKey.replace(/[^a-z0-9]/gi,'_')}`;
-      summaryEmailBodies[bodyId] = emailBody;
-
-      return `<div class="summary-owner-card">
-        <div class="summary-owner-header">
-          <div>
-            <div class="summary-owner-name">${escHtml(ownerName)}</div>
-            <div style="font-size:11px;color:var(--text3);margin-top:2px;font-family:'DM Mono',monospace">${oTotal} task${oTotal!==1?'s':''} ${oOverdue>0?`· <span style="color:var(--critical)">${oOverdue} overdue</span>`:''} ${oUrgent>0?`· 🔥 ${oUrgent} urgent`:''} ${oSubs>0?`· ${oDone}/${oSubs} sub-tasks done`:''}</div>
-          </div>
-          <div class="summary-owner-actions">
-            <input class="summary-email-input" id="${inputId}" type="email" placeholder="owner@email.com">
-            <button class="btn" onclick="emailOwner('${inputId}', '${escHtml(ownerName)}', '${bodyId}')">✉ Email</button>
-            <button class="btn" onclick="copyOwnerSummary('${bodyId}')">⎘ Copy</button>
-          </div>
-        </div>
-        <div class="summary-owner-stats">${statBadges}</div>
-        ${taskRows}
+    const taskRows = ownerTasks.slice().sort((a,b) => { const PO={Critical:0,High:1,Medium:2,Low:3}; return (PO[a.priority]||2)-(PO[b.priority]||2); }).map(t => {
+      const overdueMark = t.dueDate && new Date(t.dueDate+'T00:00:00') < today && t.status !== 'Done' ? `<span style="color:var(--critical);font-size:10px">overdue</span>` : '';
+      return `<div class="summary-task-row">
+        <span class="summary-mini-badge" style="${PRIO_COLORS[t.priority]||''}">${t.priority||'Med'}</span>
+        <span class="summary-mini-badge" style="background:var(--surface3);${STATUS_COLORS[t.status]||''}">${t.status||'Open'}</span>
+        <span class="summary-task-title">${escHtml(t.title)}</span>
+        ${overdueMark}${t.urgent ? '<span style="font-size:11px">🔥</span>' : ''}${t.important ? '<span style="font-size:11px">⭐</span>' : ''}
       </div>`;
     }).join('');
+
+    const emailBody = buildOwnerEmailBody(ownerName, ownerTasks, oCounts, oOverdue, oUrgent, oSubs, oDone);
+    const inputId = `email-${ownerKey.replace(/[^a-z0-9]/gi,'_')}`;
+    const bodyId = `body-${ownerKey.replace(/[^a-z0-9]/gi,'_')}`;
+    summaryEmailBodies[bodyId] = emailBody;
+
+    return `<div class="summary-owner-card">
+      <div class="summary-owner-header">
+        <div>
+          <div class="summary-owner-name">${escHtml(ownerName)}</div>
+          <div style="font-size:11px;color:var(--text3);margin-top:2px;font-family:'DM Mono',monospace">${oTotal} task${oTotal!==1?'s':''} ${oOverdue>0?`· <span style="color:var(--critical)">${oOverdue} overdue</span>`:''} ${oUrgent>0?`· 🔥 ${oUrgent} urgent`:''} ${oSubs>0?`· ${oDone}/${oSubs} sub-tasks done`:''}</div>
+        </div>
+        <div class="summary-owner-actions">
+          <input class="summary-email-input" id="${inputId}" type="email" placeholder="owner@email.com">
+          <button class="btn" onclick="emailOwner('${inputId}', '${escHtml(ownerName)}', '${bodyId}')">✉ Email</button>
+          <button class="btn" onclick="copyOwnerSummary('${bodyId}')">⎘ Copy</button>
+        </div>
+      </div>
+      <div class="summary-owner-stats">${statBadges}</div>
+      ${taskRows}
+    </div>`;
+  }).join('');
 
   return boardHTML + `<div class="section-header">By Owner</div>` + ownersHTML;
 }
 
 function buildOwnerEmailBody(ownerName, tasks, counts, overdue, urgent, totalSubs, doneSubs) {
-  const lines = [];
-  lines.push(`Hi ${ownerName},`);
-  lines.push('');
-  lines.push(`Here is your current task summary from TeamTrack:`);
-  lines.push('');
+  const lines = [`Hi ${ownerName},`, '', 'Here is your current task summary from TeamTrack:', ''];
   lines.push(`Total tasks: ${tasks.length}`);
   const statusLine = Object.entries(counts).filter(([,v])=>v>0).map(([s,v])=>`${v} ${s}`).join(' · ');
   if (statusLine) lines.push(`Status: ${statusLine}`);
   if (overdue) lines.push(`Overdue: ${overdue}`);
   if (urgent) lines.push(`Urgent: ${urgent}`);
   if (totalSubs) lines.push(`Sub-tasks: ${doneSubs}/${totalSubs} done`);
-  lines.push('');
-  lines.push('─────────────────────────');
-
+  lines.push('', '─────────────────────────');
   const PRIO_ORDER = { Critical:0, High:1, Medium:2, Low:3 };
-  const sorted = [...tasks].sort((a,b) => (PRIO_ORDER[a.priority]||2) - (PRIO_ORDER[b.priority]||2));
-
-  sorted.forEach(t => {
-    lines.push('');
-    lines.push(`[${t.priority||'Medium'}] [${t.status||'Open'}] ${t.title}`);
+  [...tasks].sort((a,b) => (PRIO_ORDER[a.priority]||2)-(PRIO_ORDER[b.priority]||2)).forEach(t => {
+    lines.push('', `[${t.priority||'Medium'}] [${t.status||'Open'}] ${t.title}`);
     if (t.description) lines.push(`  ${t.description}`);
     if (t.dueDate) lines.push(`  Due: ${t.dueDate}`);
-    if (t.urgent) lines.push(`  🔥 Urgent`);
-    if (t.important) lines.push(`  ⭐ Important`);
-    if (t.subtasks && t.subtasks.length) {
-      lines.push(`  Sub-tasks:`);
-      t.subtasks.forEach(st => {
-        lines.push(`    • [${st.status||'Open'}] ${st.text}`);
-      });
-    }
+    if (t.urgent) lines.push('  🔥 Urgent');
+    if (t.important) lines.push('  ⭐ Important');
+    if (t.subtasks && t.subtasks.length) { lines.push('  Sub-tasks:'); t.subtasks.forEach(st => lines.push(`    • [${st.status||'Open'}] ${st.text}`)); }
   });
-
-  lines.push('');
-  lines.push('─────────────────────────');
-  lines.push('Sent from TeamTrack');
+  lines.push('', '─────────────────────────', 'Sent from TeamTrack');
   return lines.join('\n');
 }
 
@@ -2014,20 +1564,12 @@ function emailOwner(inputId, ownerName, bodyId) {
   const body = summaryEmailBodies[bodyId] || '';
   const subject = encodeURIComponent(`TeamTrack Summary — ${ownerName}`);
   const encodedBody = encodeURIComponent(body);
-  if (email) {
-    window.location.href = `mailto:${email}?subject=${subject}&body=${encodedBody}`;
-  } else {
-    window.location.href = `mailto:?subject=${subject}&body=${encodedBody}`;
-  }
+  window.location.href = email ? `mailto:${email}?subject=${subject}&body=${encodedBody}` : `mailto:?subject=${subject}&body=${encodedBody}`;
 }
 
 function copyOwnerSummary(bodyId) {
   const body = summaryEmailBodies[bodyId] || '';
-  navigator.clipboard.writeText(body).then(() => {
-    showToast('Summary copied to clipboard', 'success');
-  }).catch(() => {
-    showToast('Could not copy — try manually', 'error');
-  });
+  navigator.clipboard.writeText(body).then(() => showToast('Summary copied to clipboard', 'success')).catch(() => showToast('Could not copy — try manually', 'error'));
 }
 
 // ─── MODAL HELPERS ────────────────────────────────────────────────────────────
@@ -2055,7 +1597,7 @@ function escHtml(s) {
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 async function init() {
   renderTasks();
-  const loaded = await loadFromGitHub();
+  const loaded = await loadFromNotion();
   if (loaded) renderTasks();
 }
 
